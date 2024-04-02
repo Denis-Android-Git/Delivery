@@ -18,4 +18,5 @@
     <string name="sum">%1$s ₽</string>
     <string name="order">Заказать за %1$s ₽</string>
     <string name="empty">Пусто, выберите блюда в каталоге :)</string>
+    <string name="pricedb">%1$s ₽</string>
 </resources>
