@@ -130,6 +130,7 @@ fun BasketScreen(
             Button(
                 onClick = {
                     navController.navigate("animation")
+                    dbViewModel.clearDb()
                 },
                 shape = RoundedCornerShape(8.dp),
                 modifier = Modifier

@@ -17,4 +17,5 @@ interface DbRepository {
 
     @Delete
     suspend fun delete(item: ProductFromDb)
+
 }

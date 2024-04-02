@@ -49,8 +49,7 @@ val module = module {
     factory { DbListUseCase(get()) }
     factory { DeleteUseCase(get()) }
 
-
     viewModel { ProductsViewModel(get(), get(), get()) }
-    viewModel { DbViewModel(get(), get(), get()) }
+    viewModel { DbViewModel(get(), get(), get(), get()) }
 
 }

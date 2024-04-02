@@ -2,10 +2,12 @@ package com.example.delivery.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.database.MyDataBase
 import com.example.domain.model.ProductFromDb
 import com.example.domain.usecase.DbListUseCase
 import com.example.domain.usecase.DeleteUseCase
 import com.example.domain.usecase.UpsertItemUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -13,7 +15,8 @@ import kotlinx.coroutines.launch
 class DbViewModel(
     private val upsertItemUseCase: UpsertItemUseCase,
     private val dbListUseCase: DbListUseCase,
-    private val deleteUseCase: DeleteUseCase
+    private val deleteUseCase: DeleteUseCase,
+    private val db: MyDataBase
 ) : ViewModel() {
     val list = this.dbListUseCase.execute()
         .stateIn(
@@ -21,6 +24,12 @@ class DbViewModel(
             SharingStarted.WhileSubscribed(5000),
             emptyList()
         )
+
+    fun clearDb() {
+        viewModelScope.launch(Dispatchers.IO) {
+            db.clearAllTables()
+        }
+    }
 
     fun upsert(
         count: Int,
