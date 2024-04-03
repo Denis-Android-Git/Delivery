@@ -72,6 +72,8 @@ dependencies {
 
     //Koin
     implementation(libs.koin.androidx.compose)
+    implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
     //Ktor
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.android)

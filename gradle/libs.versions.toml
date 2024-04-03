@@ -24,6 +24,7 @@ navigationCompose = "2.7.7"
 leakcanaryAndroid = "2.13"
 coilCompose = "2.5.0"
 ksp = "1.9.23-1.0.19"
+koin-bom = "3.5.1"
 
 [libraries]
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
@@ -58,7 +59,8 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorCli
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room-runtime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room-runtime" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room-runtime" }
-
+koin-bom = { module = "io.insert-koin:koin-bom", version.ref = "koin-bom" }
+koin-core = { module = "io.insert-koin:koin-core" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

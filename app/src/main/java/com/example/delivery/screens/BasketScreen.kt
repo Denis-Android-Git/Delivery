@@ -142,7 +142,7 @@ fun BasketScreen(
                 )
             ) {
                 Text(
-                    text = stringResource(R.string.order, sum),
+                    text = stringResource(R.string.order, sum / 100),
                     color = Color.White,
                     fontSize = 16.sp,
                     fontFamily = FontFamily(Font(R.font.roboto))

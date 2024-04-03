@@ -93,14 +93,14 @@ fun DbItem(
             horizontalAlignment = Alignment.End
         ) {
             Text(
-                text = stringResource(R.string.pricedb, productFromDb.price),
+                text = stringResource(R.string.pricedb, productFromDb.price / 100),
                 fontSize = 16.sp,
                 fontFamily = FontFamily(Font(R.font.roboto)),
                 fontWeight = FontWeight.Bold
             )
             if (productFromDb.oldPrice != null) {
                 Text(
-                    text = stringResource(R.string.pricedb, productFromDb.oldPrice!!),
+                    text = stringResource(R.string.pricedb, productFromDb.oldPrice!! / 100),
                     fontSize = 14.sp,
                     fontFamily = FontFamily(Font(R.font.roboto)),
                     textDecoration = TextDecoration.LineThrough,

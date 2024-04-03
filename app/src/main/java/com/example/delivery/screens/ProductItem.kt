@@ -136,14 +136,17 @@ fun ProductItem(
                     ) {
                         Row {
                             Text(
-                                text = stringResource(R.string.price, item.price_current),
+                                text = stringResource(R.string.price, item.price_current / 100),
                                 color = Color.Black,
                                 fontSize = 16.sp,
                                 fontFamily = FontFamily(Font(R.font.roboto)),
                             )
                             if (item.price_old != null) {
                                 Text(
-                                    text = stringResource(R.string.twoprice, item.price_old!!),
+                                    text = stringResource(
+                                        R.string.twoprice,
+                                        item.price_old!! / 100
+                                    ),
                                     modifier = Modifier.padding(start = 5.dp),
                                     textDecoration = TextDecoration.LineThrough,
                                     color = Color.Gray,

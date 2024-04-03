@@ -239,14 +239,17 @@ fun DetailScreen(
         ) {
             Row {
                 Text(
-                    text = stringResource(R.string.buy, item.price_current),
+                    text = stringResource(R.string.buy, item.price_current / 100),
                     color = Color.White,
                     fontSize = 16.sp,
                     fontFamily = FontFamily(Font(R.font.roboto))
                 )
                 if (item.price_old != null) {
                     Text(
-                        text = item.price_old.toString(),
+                        text = stringResource(
+                            R.string.twoprice,
+                            item.price_old!! / 100
+                        ),
                         modifier = Modifier.padding(start = 10.dp),
                         textDecoration = TextDecoration.LineThrough,
                         color = Color.White,

@@ -1,7 +1,6 @@
 package com.example.delivery.screens
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
@@ -203,7 +202,6 @@ fun MainScreen(
                                     currentSelected.remove(tag.id)
                                 }
                                 selectedOptions.value = currentSelected
-                                Log.d("value", selectedOptions.value.toString())
                             },
                             colors = CheckboxColors(
                                 checkedBorderColor = Color(0xFFF15412),
@@ -458,7 +456,7 @@ fun MainScreen(
                             modifier = Modifier.padding(horizontal = 6.dp)
                         )
                         Text(
-                            text = stringResource(R.string.sum, sum),
+                            text = stringResource(R.string.sum, sum / 100),
                             color = Color.White,
                             fontSize = 16.sp,
                             fontFamily = FontFamily(Font(R.font.roboto))
