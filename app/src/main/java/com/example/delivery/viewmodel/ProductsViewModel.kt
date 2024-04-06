@@ -32,9 +32,13 @@ class ProductsViewModel(
 
     init {
         viewModelScope.launch {
-            _categories.value = categoryListUseCase.execute()
-            _tags.value = tagsUseCase.execute()
-            _products.value = productListUseCase.execute()
+            try {
+                _categories.value = categoryListUseCase.execute()
+                _tags.value = tagsUseCase.execute()
+                _products.value = productListUseCase.execute()
+            } catch (e: Exception) {
+                _states.value = States.Error(e.message)
+            }
         }
     }
 
