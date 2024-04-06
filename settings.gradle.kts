@@ -23,3 +23,4 @@ rootProject.name = "Delivery"
 include(":app")
 include(":data")
 include(":domain")
+include(":app:baselineprofile")

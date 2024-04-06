@@ -449,6 +449,7 @@ fun MainScreen(
                         containerColor = Color(0xFFF15412)
                     )
                 ) {
+
                     Row {
                         Image(
                             painter = painterResource(id = R.drawable.cart),

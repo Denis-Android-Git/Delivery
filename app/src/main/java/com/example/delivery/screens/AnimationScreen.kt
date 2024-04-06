@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
@@ -22,4 +23,10 @@ fun AnimationScreen(
         modifier = modifier.fillMaxSize(),
         composition = lottie, iterations = LottieConstants.IterateForever
     )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun Anim() {
+    AnimationScreen(modifier = Modifier)
 }

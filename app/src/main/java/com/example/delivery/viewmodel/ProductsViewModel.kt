@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.data.states.States
 import com.example.delivery.R
 import com.example.domain.model.Category
+import com.example.domain.model.Product
 import com.example.domain.usecase.CategoryListUseCase
 import com.example.domain.usecase.GetTagsUseCase
 import com.example.domain.usecase.ProductListUseCase
@@ -24,6 +25,8 @@ class ProductsViewModel(
 
     private var _categories = MutableStateFlow<List<Category>>(emptyList())
     val categories = _categories.asStateFlow()
+    private var _products = MutableStateFlow<List<Product>>(emptyList())
+    private val products = _products.asStateFlow()
     private var _tags = MutableStateFlow<List<Category>>(emptyList())
     val tags = _tags.asStateFlow()
 
@@ -31,6 +34,7 @@ class ProductsViewModel(
         viewModelScope.launch {
             _categories.value = categoryListUseCase.execute()
             _tags.value = tagsUseCase.execute()
+            _products.value = productListUseCase.execute()
         }
     }
 
@@ -39,10 +43,12 @@ class ProductsViewModel(
         viewModelScope.launch {
             try {
                 val tab = list[index]
-                val filteredList = productListUseCase.execute().filter {
-                    it.category_id == tab.id
+                products.collect { list ->
+                    val filteredList = list.filter {
+                        it.category_id == tab.id
+                    }
+                    _states.value = States.Success(filteredList)
                 }
-                _states.value = States.Success(filteredList)
             } catch (e: Exception) {
                 _states.value = States.Error(e.message)
             }
@@ -53,14 +59,15 @@ class ProductsViewModel(
         _states.value = States.Loading
         viewModelScope.launch {
             try {
-                val list = productListUseCase.execute()
-                val result = list.filter {
-                    it.description.contains(query)
-                }
-                if (result.isEmpty()) {
-                    _states.value = States.Error(application.getString(R.string.nothing))
-                } else {
-                    _states.value = States.Success(result)
+                products.collect { list ->
+                    val result = list.filter {
+                        it.description.contains(query)
+                    }
+                    if (result.isEmpty()) {
+                        _states.value = States.Error(application.getString(R.string.nothing))
+                    } else {
+                        _states.value = States.Success(result)
+                    }
                 }
             } catch (e: Exception) {
                 _states.value = States.Error(e.message)
@@ -73,16 +80,18 @@ class ProductsViewModel(
         viewModelScope.launch {
             try {
                 val tab = list[index]
-                val tabList = productListUseCase.execute().filter {
-                    it.category_id == tab.id
-                }
-                val tagList = tabList.filter {
-                    it.tag_ids.containsAll(tags)
-                }
-                if (tagList.isEmpty()) {
-                    _states.value = States.Error(application.getString(R.string.no_filter))
-                } else {
-                    _states.value = States.Success(tagList)
+                products.collect { list ->
+                    val tabList = list.filter {
+                        it.category_id == tab.id
+                    }
+                    val tagList = tabList.filter {
+                        it.tag_ids.containsAll(tags)
+                    }
+                    if (tagList.isEmpty()) {
+                        _states.value = States.Error(application.getString(R.string.no_filter))
+                    } else {
+                        _states.value = States.Success(tagList)
+                    }
                 }
             } catch (e: Exception) {
                 _states.value = States.Error(e.message)
