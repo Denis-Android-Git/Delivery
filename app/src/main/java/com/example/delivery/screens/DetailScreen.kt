@@ -54,7 +54,7 @@ fun DetailScreen(
         Column(
             modifier = modifier
                 .fillMaxSize()
-                .padding(bottom = 50.dp, top = 50.dp)
+                .padding(bottom = 70.dp, top = 50.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             Box(modifier = Modifier.fillMaxWidth()) {
