@@ -72,7 +72,7 @@ fun SearchScreen(
                 onActiveChange = { productsViewModel.onToogleSearch() },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = if (isSearching) 0.dp else 16.dp),
                 colors = SearchBarDefaults.colors(
                     containerColor = Color.White,
                     dividerColor = Color.Gray
