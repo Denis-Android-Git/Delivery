@@ -14,7 +14,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.delivery.screens.AnimationScreen
 import com.example.delivery.screens.BasketScreen
 import com.example.delivery.screens.MainScreen
+import com.example.delivery.screens.SearchScreen
 import com.example.delivery.ui.theme.DeliveryTheme
+import com.example.delivery.viewmodel.ProductsViewModel
+import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.KoinContext
 
 class MainActivity : ComponentActivity() {
@@ -30,11 +33,14 @@ class MainActivity : ComponentActivity() {
 
                         val navController = rememberNavController()
 
+                        val productsViewModel = koinViewModel<ProductsViewModel>()
+
                         NavHost(navController = navController, startDestination = "mainScreen") {
                             composable(route = "mainScreen") {
                                 MainScreen(
                                     modifier = Modifier.padding(innerPadding),
-                                    navController = navController
+                                    navController = navController,
+                                    productsViewModel = productsViewModel
                                 )
                             }
                             composable(route = "basketScreen") {
@@ -46,6 +52,12 @@ class MainActivity : ComponentActivity() {
                             composable(route = "animation") {
                                 AnimationScreen(
                                     modifier = Modifier.padding(innerPadding),
+                                )
+                            }
+                            composable(route = "search") {
+                                SearchScreen(
+                                    modifier = Modifier.padding(innerPadding),
+                                    productsViewModel = productsViewModel
                                 )
                             }
                         }

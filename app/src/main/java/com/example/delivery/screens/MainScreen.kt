@@ -79,7 +79,7 @@ import org.koin.androidx.compose.koinViewModel
 fun MainScreen(
     modifier: Modifier,
     navController: NavController,
-    productsViewModel: ProductsViewModel = koinViewModel(),
+    productsViewModel: ProductsViewModel,
     dbViewModel: DbViewModel = koinViewModel()
 ) {
     val dbList = dbViewModel.list.collectAsState()
@@ -108,12 +108,6 @@ fun MainScreen(
     var showBottomSheet by remember { mutableStateOf(false) }
     val selectedOptions = remember { mutableStateOf(listOf<Int>()) }
     val context = LocalContext.current
-    var showSearchDialog by remember {
-        mutableStateOf(false)
-    }
-    var search by remember {
-        mutableStateOf("")
-    }
 
     if (categories.value.isNotEmpty()) {
         LaunchedEffect(Unit) {
@@ -122,45 +116,7 @@ fun MainScreen(
     }
 
     AnimatedVisibility(visible = showList) {
-        if (showSearchDialog) {
-            BasicAlertDialog(onDismissRequest = { showSearchDialog = false }) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
 
-                        TextField(value = search, onValueChange = {
-                            search = it
-                        })
-                        Button(
-                            onClick = {
-                                productsViewModel.search(
-                                    search,
-                                    context.applicationContext as Application
-                                )
-                                showSearchDialog = false
-                            },
-                            shape = RoundedCornerShape(8.dp),
-                            modifier = Modifier
-                                .padding(16.dp)
-                                .width(343.dp)
-                                .height(48.dp),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color(0xFFF15412)
-                            )
-                        ) {
-                            Text(text = stringResource(R.string.search))
-                        }
-                    }
-                }
-            }
-        }
         if (showBottomSheet) {
             ModalBottomSheet(
                 onDismissRequest = {
@@ -301,7 +257,7 @@ fun MainScreen(
                             )
                             IconButton(
                                 onClick = {
-                                    showSearchDialog = true
+                                    navController.navigate("search")
                                 },
                                 Modifier
                                     .padding(end = 16.dp)

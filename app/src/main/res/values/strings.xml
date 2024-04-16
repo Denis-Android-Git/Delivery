@@ -19,4 +19,5 @@
     <string name="order">Заказать за %1$s ₽</string>
     <string name="empty">Пусто, выберите блюда в каталоге :)</string>
     <string name="pricedb">%1$s ₽</string>
+    <string name="find_food">Найти блюдо</string>
 </resources>
